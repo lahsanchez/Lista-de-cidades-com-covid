@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  final List<String> cidades = ["Santa Cruz do Rio Pardo", " Ourinhos", "Bauru", "Marília", "Jaú", "Campinas", "Sorocaba", "Jacarezinho"];
+  
+  final List<String> informacoes = ["Casos Positivos: 521, Pacientes Recuperados: 266, Óbitos: 3", "Casos Positivos: 872, Pacientes Recuperados: 557, Óbitos: 9", "Casos Positivos: 3283, Pacientes Recuperados: 2719, Óbitos: 60", "Casos Positivos: 870, Pacientes Recuperados: 805, Óbitos: 18", "Casos Positivos: 893, Pacientes Recuperados: 519, Óbitos: 24", "Casos Positivos: 16.263, Pacientes Recuperados: 14.045, Óbitos: 614", "Casos Positivos: 10.062, Pacientes Recuperados: 9.096, Óbitos: 235", "Casos Positivos: 196, Pacientes Recuperados: 139, Óbitos: 1"];
+  
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Welcome to Flutter',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Lista de Cidades com Covid'),
+        ),
+        body: ListView.builder(
+          itemCount: cidades.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+            title: Text('${cidades[index]}'),
+              onTap: () {
+                Navigator.push(
+                context, MaterialPageRoute(
+                builder: (context) => Informacoes(informacoes: informacoes[index])),
+                );                
+              },
+            );
+          }
+        ),
+      ),
+    );
+  }
+}
+
+class Informacoes extends StatelessWidget{
+  final String informacoes;
+  
+  Informacoes({Key key, @required this.informacoes}) : super (key: key);
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    appBar: AppBar(
+        title: Text("Informaçoes das Cidades"),
+      ),
+      body: Center(
+        child: Text(informacoes),
+      ),
+  );
+}
+}
